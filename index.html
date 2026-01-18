@@ -7,7 +7,7 @@
 
   <style>
     body { font-family: Arial, sans-serif; background:#f4f4f4; text-align:center; padding:40px; margin:0; }
-    .container { background:#fff; max-width:720px; margin:0 auto; padding:30px; border-radius:8px; }
+    .container { background:#fff; max-width:760px; margin:0 auto; padding:30px; border-radius:8px; }
     h1 { color:#222; margin-top:0; }
     p { color:#444; line-height:1.5; }
 
@@ -17,7 +17,6 @@
       border-radius:5px; font-weight:bold;
     }
     a.button:hover { background:#0056b3; }
-
     .no-thanks { display:block; margin-top:14px; font-size:13px; color:#777; text-decoration:underline; }
 
     /* Copy station (hidden by default) */
@@ -35,6 +34,14 @@
     }
     .copy-btn:hover { background:#e0e0e0; }
     .tiny { font-size:12px; color:#888; margin-top:8px; }
+    .grid {
+      display:grid;
+      grid-template-columns: 1fr;
+      gap:16px;
+    }
+    @media (min-width: 780px) {
+      .grid { grid-template-columns: 1fr 1fr; }
+    }
   </style>
 </head>
 
@@ -61,30 +68,52 @@
 
     <!-- Copy station (hidden unless ?copy=1) -->
     <div id="copyStation" class="copy-station">
-      <div class="label">Subject</div>
-      <div id="subjectBox" class="copybox"></div>
-      <button class="copy-btn" onclick="copyText('subjectBox')">Copy Subject</button>
 
-      <div class="label" style="margin-top:16px;">Body</div>
-      <div id="bodyBox" class="copybox"></div>
-      <button class="copy-btn" onclick="copyText('bodyBox')">Copy Body</button>
+      <div class="label">Quick Buttons</div>
+      <button class="copy-btn" onclick="copyText('subjectBox')">Copy Subject</button>
+      <button class="copy-btn" onclick="copyText('bodyPlainBox')">Copy Body (Plain)</button>
+      <button class="copy-btn" onclick="copyText('bodyHtmlBox')">Copy Body (150 Mailer HTML)</button>
+      <button class="copy-btn" onclick="copyWebsiteUrl()">Copy Website URL (Frame-safe)</button>
 
       <div class="tiny">
-        Copy tools visible only when <strong>?copy=1</strong> is in the URL.
+        Tip for 150 Mailer: click <strong>Copy Body (150 Mailer HTML)</strong>, then paste into <strong>Source</strong>.
+      </div>
+
+      <div class="grid" style="margin-top:16px;">
+        <div>
+          <div class="label">Subject (from ad.txt)</div>
+          <div id="subjectBox" class="copybox"></div>
+        </div>
+
+        <div>
+          <div class="label">Website URL (frame-safe)</div>
+          <div id="websiteBox" class="copybox"></div>
+        </div>
+
+        <div>
+          <div class="label">Body (Plain)</div>
+          <div id="bodyPlainBox" class="copybox"></div>
+        </div>
+
+        <div>
+          <div class="label">Body (150 Mailer HTML)</div>
+          <div id="bodyHtmlBox" class="copybox"></div>
+        </div>
       </div>
     </div>
   </div>
 
   <script>
-    // Load offer link
+    // Load offer link for CTA button
     fetch('offer.txt', { cache: 'no-store' })
       .then(r => r.text())
       .then(t => {
         const url = (t || '').trim();
         if (/^https?:\/\//i.test(url)) document.getElementById('cta').href = url;
-      });
+      })
+      .catch(() => {});
 
-    // Copy helper
+    // Copy helper (broad compatibility)
     function copyText(id) {
       const el = document.getElementById(id);
       const range = document.createRange();
@@ -95,25 +124,59 @@
       window.getSelection().removeAllRanges();
     }
 
+    // Build the frame-safe base URL (no query string)
+    function getBaseUrl() {
+      return window.location.origin + window.location.pathname;
+    }
+
+    function copyWebsiteUrl() {
+      const base = getBaseUrl();
+      const websiteBox = document.getElementById('websiteBox');
+      websiteBox.textContent = base;
+      copyText('websiteBox');
+    }
+
+    // Convert plain text body to 150 Mailer-friendly HTML using <br><br>
+    function to150Html(bodyPlain) {
+      // Normalize newlines
+      const t = (bodyPlain || '').replace(/\r\n/g, '\n').replace(/\r/g, '\n').trim();
+      // Split into paragraphs by blank lines
+      const paragraphs = t.split(/\n\s*\n+/).map(p => p.trim()).filter(Boolean);
+      // Within paragraphs, single newlines become <br>
+      const htmlParas = paragraphs.map(p => p.replace(/\n/g, '<br>'));
+      // Separate paragraphs with <br><br>
+      return htmlParas.join('<br><br>');
+    }
+
     // Show copy station only with ?copy=1
     const params = new URLSearchParams(window.location.search);
     if (params.get('copy') === '1') {
       document.getElementById('copyStation').style.display = 'block';
+
+      // Populate website box with base URL (for visibility)
+      document.getElementById('websiteBox').textContent = getBaseUrl();
 
       fetch('ad.txt', { cache: 'no-store' })
         .then(r => r.text())
         .then(t => {
           const text = (t || '').trim();
 
-          // Parse SUBJECT and BODY
           const subjectMatch = text.match(/SUBJECT:\s*([\s\S]*?)\n\s*BODY:/i);
           const bodyMatch = text.match(/BODY:\s*([\s\S]*)/i);
 
-          document.getElementById('subjectBox').textContent =
-            subjectMatch ? subjectMatch[1].trim() : '(Subject not found)';
+          const subject = subjectMatch ? subjectMatch[1].trim() : '(Subject not found)';
+          const bodyPlain = bodyMatch ? bodyMatch[1].trim() : '(Body not found)';
 
-          document.getElementById('bodyBox').textContent =
-            bodyMatch ? bodyMatch[1].trim() : '(Body not found)';
+          document.getElementById('subjectBox').textContent = subject;
+          document.getElementById('bodyPlainBox').textContent = bodyPlain;
+
+          // HTML version for 150 Mailer Source mode
+          document.getElementById('bodyHtmlBox').textContent = to150Html(bodyPlain);
+        })
+        .catch(() => {
+          document.getElementById('subjectBox').textContent = 'ad.txt not found';
+          document.getElementById('bodyPlainBox').textContent = 'ad.txt not found';
+          document.getElementById('bodyHtmlBox').textContent = 'ad.txt not found';
         });
     }
   </script>
