@@ -1,119 +1,237 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Free Traffic & Marketing Tools</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="description" content="Get free traffic, tools, and commissions with LeadsLeap – no credit card needed!">
+  <title>All-in-One Marketing System – FREE</title>
 
   <style>
-    body { font-family: Arial, sans-serif; background:#f4f4f4; text-align:center; padding:40px; margin:0; }
-    .container { background:#fff; max-width:760px; margin:0 auto; padding:30px; border-radius:8px; }
-    h1 { color:#222; margin-top:0; }
-    p { color:#444; line-height:1.5; }
-
-    a.button {
-      display:inline-block; margin-top:22px; padding:14px 24px;
-      background:#007bff; color:#fff; text-decoration:none;
-      border-radius:5px; font-weight:bold;
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: #f2f4f8;
+      color: #333;
     }
-    a.button:hover { background:#0056b3; }
-    .no-thanks { display:block; margin-top:14px; font-size:13px; color:#777; text-decoration:underline; }
+    header {
+      background: #1a202c;
+      color: white;
+      padding: 2rem;
+      text-align: center;
+    }
+    h1 {
+      font-size: 2rem;
+      margin: 0.5rem 0;
+    }
+    h2 {
+      font-size: 1.2rem;
+      font-weight: normal;
+      margin-bottom: 1rem;
+    }
+    .container {
+      max-width: 700px;
+      margin: 2rem auto;
+      padding: 1.5rem;
+      background: white;
+      border-radius: 8px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    }
+    ul {
+      line-height: 1.8;
+    }
 
-    /* Copy station (hidden by default) */
-    .copy-station { display:none; margin-top:30px; text-align:left; }
-    .label { font-size:13px; font-weight:bold; margin-bottom:6px; color:#555; }
-    .copybox {
-      background:#fafafa; border:1px solid #ddd; padding:12px;
-      white-space:pre-wrap; font-size:14px; color:#333;
-      border-radius:6px;
+    .cta {
+      text-align: center;
+      margin-top: 2rem;
+    }
+    .cta a {
+      display: inline-block;
+      background: #2b6cb0;
+      color: white;
+      text-decoration: none;
+      padding: 1rem 2rem;
+      font-size: 1.1rem;
+      border-radius: 6px;
+      transition: background 0.3s ease;
+      font-weight: bold;
+    }
+    .cta a:hover {
+      background: #2c5282;
+    }
+
+    .no-thanks {
+      display: block;
+      margin-top: 14px;
+      font-size: 13px;
+      color: #777;
+      text-decoration: underline;
+      text-align: center;
+    }
+
+    footer {
+      text-align: center;
+      padding: 1rem;
+      font-size: 0.9rem;
+      color: #666;
+    }
+
+    /* ---------- Copy Station (hidden unless ?copy=1) ---------- */
+    .copy-station {
+      display: none;
+      max-width: 900px;
+      margin: 1.25rem auto 2.5rem auto;
+      padding: 1.25rem;
+      background: #ffffff;
+      border-radius: 8px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+      border: 1px solid #e6e8ee;
+      text-align: left;
+    }
+    .copy-title {
+      font-weight: bold;
+      margin: 0 0 10px 0;
+      color: #1a202c;
+    }
+    .copy-actions {
+      margin-bottom: 14px;
     }
     .copy-btn {
-      margin-top:6px; padding:6px 10px; font-size:12px;
-      cursor:pointer; border-radius:4px;
-      border:1px solid #aaa; background:#eee;
+      margin: 6px 8px 6px 0;
+      padding: 7px 10px;
+      font-size: 12px;
+      cursor: pointer;
+      border-radius: 6px;
+      border: 1px solid #c6cbd6;
+      background: #f2f4f8;
     }
-    .copy-btn:hover { background:#e0e0e0; }
-    .tiny { font-size:12px; color:#888; margin-top:8px; }
+    .copy-btn:hover {
+      background: #e9edf5;
+    }
     .grid {
-      display:grid;
+      display: grid;
       grid-template-columns: 1fr;
-      gap:16px;
+      gap: 14px;
     }
-    @media (min-width: 780px) {
+    @media (min-width: 900px) {
       .grid { grid-template-columns: 1fr 1fr; }
+    }
+    .label {
+      font-size: 13px;
+      font-weight: bold;
+      margin-bottom: 6px;
+      color: #444;
+    }
+    .copybox {
+      background: #fafafa;
+      border: 1px solid #ddd;
+      padding: 12px;
+      white-space: pre-wrap;
+      font-size: 14px;
+      color: #333;
+      border-radius: 8px;
+      min-height: 44px;
+    }
+    .tiny {
+      font-size: 12px;
+      color: #777;
+      margin-top: 8px;
+      line-height: 1.35;
     }
   </style>
 </head>
 
 <body>
+
+  <header>
+    <h1>Ready to Grow Your Online Business?</h1>
+    <h2>Get the All-in-One Marketing Platform — 100% FREE</h2>
+  </header>
+
   <div class="container">
-    <h1>Free Traffic & Marketing Tools</h1>
+    <p><strong>LeadsLeap gives you every tool you need to grow online — without paying a dime.</strong></p>
 
-    <p>
-      Looking for a simple way to get traffic and basic marketing tools
-      without paying monthly fees?
-    </p>
+    <ul>
+      <li>✅ Free autoresponder (no limits)</li>
+      <li>✅ Free landing page & popup builder</li>
+      <li>✅ Free link tracker with real-time stats</li>
+      <li>✅ Free targeted traffic from real users</li>
+      <li>✅ Get paid to surf + 4 other income streams</li>
+    </ul>
 
-    <p>
-      Free lifetime access.<br>
-      No obligation.<br>
-      Decide if it’s right for you.
-    </p>
+    <p>Perfect for beginners, side hustlers, affiliate marketers, or anyone tired of juggling expensive tools.</p>
 
-    <a id="cta" class="button" href="about:blank" target="_blank" rel="noopener">
-      Continue →
-    </a>
+    <div class="cta">
+      <!-- href gets replaced dynamically from offer.txt -->
+      <a id="ctaLink" href="about:blank" target="_blank" rel="noopener">Create Your Free Account Now</a>
+    </div>
 
     <a class="no-thanks" href="about:blank">No thanks, go back</a>
+  </div>
 
-    <!-- Copy station (hidden unless ?copy=1) -->
-    <div id="copyStation" class="copy-station">
+  <!-- Copy Station: ONLY appears for you when you use ?copy=1 -->
+  <div id="copyStation" class="copy-station">
+    <div class="copy-title">Copy Station (Visible only with ?copy=1)</div>
 
-      <div class="label">Quick Buttons</div>
+    <div class="copy-actions">
       <button class="copy-btn" onclick="copyText('subjectBox')">Copy Subject</button>
       <button class="copy-btn" onclick="copyText('bodyPlainBox')">Copy Body (Plain)</button>
       <button class="copy-btn" onclick="copyText('bodyHtmlBox')">Copy Body (150 Mailer HTML)</button>
       <button class="copy-btn" onclick="copyWebsiteUrl()">Copy Website URL (Frame-safe)</button>
+    </div>
 
-      <div class="tiny">
-        Tip for 150 Mailer: click <strong>Copy Body (150 Mailer HTML)</strong>, then paste into <strong>Source</strong>.
+    <div class="grid">
+      <div>
+        <div class="label">Subject (from ad.txt)</div>
+        <div id="subjectBox" class="copybox"></div>
       </div>
 
-      <div class="grid" style="margin-top:16px;">
-        <div>
-          <div class="label">Subject (from ad.txt)</div>
-          <div id="subjectBox" class="copybox"></div>
-        </div>
-
-        <div>
-          <div class="label">Website URL (frame-safe)</div>
-          <div id="websiteBox" class="copybox"></div>
-        </div>
-
-        <div>
-          <div class="label">Body (Plain)</div>
-          <div id="bodyPlainBox" class="copybox"></div>
-        </div>
-
-        <div>
-          <div class="label">Body (150 Mailer HTML)</div>
-          <div id="bodyHtmlBox" class="copybox"></div>
-        </div>
+      <div>
+        <div class="label">Website URL (frame-safe)</div>
+        <div id="websiteBox" class="copybox"></div>
       </div>
+
+      <div>
+        <div class="label">Body (Plain)</div>
+        <div id="bodyPlainBox" class="copybox"></div>
+      </div>
+
+      <div>
+        <div class="label">Body (150 Mailer HTML)</div>
+        <div id="bodyHtmlBox" class="copybox"></div>
+      </div>
+    </div>
+
+    <div class="tiny">
+      150 Mailer tip: click <strong>Copy Body (150 Mailer HTML)</strong> and paste into <strong>Source</strong> mode.
+      <br>Also: always paste the <strong>frame-safe Website URL</strong> (no ?copy=1) into the safelist Website URL field.
     </div>
   </div>
 
+  <footer>
+    © 2026 YourBrand. This site is not affiliated with LeadsLeap. All rights reserved.
+  </footer>
+
   <script>
-    // Load offer link for CTA button
+    // -------------------------
+    // 1) Offer link: offer.txt
+    // -------------------------
     fetch('offer.txt', { cache: 'no-store' })
       .then(r => r.text())
       .then(t => {
         const url = (t || '').trim();
-        if (/^https?:\/\//i.test(url)) document.getElementById('cta').href = url;
+        if (/^https?:\/\/.+/i.test(url)) {
+          document.getElementById('ctaLink').href = url;
+        } else {
+          document.getElementById('ctaLink').href = 'about:blank';
+        }
       })
-      .catch(() => {});
+      .catch(() => {
+        document.getElementById('ctaLink').href = 'about:blank';
+      });
 
-    // Copy helper (broad compatibility)
+    // -------------------------
+    // 2) Copy helpers
+    // -------------------------
     function copyText(id) {
       const el = document.getElementById(id);
       const range = document.createRange();
@@ -124,8 +242,8 @@
       window.getSelection().removeAllRanges();
     }
 
-    // Build the frame-safe base URL (no query string)
     function getBaseUrl() {
+      // Removes query string so you never accidentally copy ?copy=1
       return window.location.origin + window.location.pathname;
     }
 
@@ -136,24 +254,29 @@
       copyText('websiteBox');
     }
 
-    // Convert plain text body to 150 Mailer-friendly HTML using <br><br>
     function to150Html(bodyPlain) {
-      // Normalize newlines
-      const t = (bodyPlain || '').replace(/\r\n/g, '\n').replace(/\r/g, '\n').trim();
-      // Split into paragraphs by blank lines
-      const paragraphs = t.split(/\n\s*\n+/).map(p => p.trim()).filter(Boolean);
-      // Within paragraphs, single newlines become <br>
+      const t = (bodyPlain || '')
+        .replace(/\r\n/g, '\n')
+        .replace(/\r/g, '\n')
+        .trim();
+
+      const paragraphs = t
+        .split(/\n\s*\n+/)
+        .map(p => p.trim())
+        .filter(Boolean);
+
       const htmlParas = paragraphs.map(p => p.replace(/\n/g, '<br>'));
-      // Separate paragraphs with <br><br>
       return htmlParas.join('<br><br>');
     }
 
-    // Show copy station only with ?copy=1
+    // -------------------------
+    // 3) Copy Station: only with ?copy=1
+    // -------------------------
     const params = new URLSearchParams(window.location.search);
     if (params.get('copy') === '1') {
       document.getElementById('copyStation').style.display = 'block';
 
-      // Populate website box with base URL (for visibility)
+      // populate website box with base URL
       document.getElementById('websiteBox').textContent = getBaseUrl();
 
       fetch('ad.txt', { cache: 'no-store' })
@@ -169,8 +292,6 @@
 
           document.getElementById('subjectBox').textContent = subject;
           document.getElementById('bodyPlainBox').textContent = bodyPlain;
-
-          // HTML version for 150 Mailer Source mode
           document.getElementById('bodyHtmlBox').textContent = to150Html(bodyPlain);
         })
         .catch(() => {
@@ -180,5 +301,6 @@
         });
     }
   </script>
+
 </body>
 </html>
