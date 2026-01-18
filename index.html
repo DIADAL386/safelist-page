@@ -6,63 +6,39 @@
   <title>Free Traffic & Marketing Tools</title>
 
   <style>
-    body {
-      font-family: Arial, sans-serif;
-      background: #f4f4f4;
-      text-align: center;
-      padding: 40px;
-      margin: 0;
-    }
-    .container {
-      background: #ffffff;
-      max-width: 700px;
-      margin: 0 auto;
-      padding: 30px;
-      border-radius: 8px;
-    }
-    h1 {
-      color: #222;
-      margin-top: 0;
-    }
-    .copybox {
-      text-align: left;
-      background: #fafafa;
-      border: 1px solid #ddd;
-      padding: 15px;
-      margin-top: 20px;
-      white-space: pre-wrap;
-      font-size: 14px;
-      color: #333;
-    }
+    body { font-family: Arial, sans-serif; background:#f4f4f4; text-align:center; padding:40px; margin:0; }
+    .container { background:#fff; max-width:700px; margin:0 auto; padding:30px; border-radius:8px; }
+    h1 { color:#222; margin-top:0; }
+
+    p { color:#444; line-height:1.5; }
+
     a.button {
-      display: inline-block;
-      margin-top: 25px;
-      padding: 14px 24px;
-      background: #007bff;
-      color: #ffffff;
-      text-decoration: none;
-      border-radius: 5px;
-      font-weight: bold;
+      display:inline-block; margin-top:22px; padding:14px 24px; background:#007bff; color:#fff;
+      text-decoration:none; border-radius:5px; font-weight:bold;
     }
-    .no-thanks {
-      display: block;
-      margin-top: 15px;
-      font-size: 13px;
-      color: #777;
-      text-decoration: underline;
+    a.button:hover { background:#0056b3; }
+
+    .no-thanks { display:block; margin-top:14px; font-size:13px; color:#777; text-decoration:underline; }
+
+    /* Copy station (hidden by default) */
+    .copy-station { display:none; margin-top:26px; text-align:left; }
+    .label { font-size:13px; font-weight:bold; margin-bottom:8px; color:#555; }
+    .copybox {
+      background:#fafafa; border:1px solid #ddd; padding:15px; white-space:pre-wrap;
+      font-size:14px; color:#333; border-radius:6px;
     }
-    .label {
-      font-size: 13px;
-      font-weight: bold;
-      margin-top: 20px;
-      color: #555;
-    }
+    .tiny { font-size:12px; color:#888; margin-top:8px; }
   </style>
 </head>
 
 <body>
   <div class="container">
     <h1>Free Traffic & Marketing Tools</h1>
+
+    <p>
+      Looking for a simple way to get traffic and basic marketing tools
+      without paying monthly fees?
+    </p>
 
     <p>
       Free lifetime access.<br>
@@ -76,31 +52,43 @@
 
     <a class="no-thanks" href="about:blank">No thanks, go back</a>
 
-    <div class="label">Today’s Solo Ad Copy</div>
-    <div id="adcopy" class="copybox">Loading ad copy…</div>
+    <!-- Hidden copy station -->
+    <div id="copyStation" class="copy-station">
+      <div class="label">Today’s Solo Ad Copy (for YOU)</div>
+      <div id="adcopy" class="copybox">Loading ad copy…</div>
+      <div class="tiny">
+        Tip: Use <strong>?copy=1</strong> at the end of the URL to show this box.
+      </div>
+    </div>
   </div>
 
   <script>
-    // Load offer link
+    // 1) Offer link (button destination)
     fetch('offer.txt', { cache: 'no-store' })
       .then(r => r.text())
       .then(t => {
-        const url = t.trim();
-        if (/^https?:\/\//i.test(url)) {
-          document.getElementById('cta').href = url;
-        }
-      });
-
-    // Load ad copy
-    fetch('ad.txt', { cache: 'no-store' })
-      .then(r => r.text())
-      .then(t => {
-        document.getElementById('adcopy').textContent = t.trim();
+        const url = (t || '').trim();
+        if (/^https?:\/\//i.test(url)) document.getElementById('cta').href = url;
       })
-      .catch(() => {
-        document.getElementById('adcopy').textContent =
-          'Ad copy not found. Please check ad.txt.';
-      });
+      .catch(() => { /* leave about:blank */ });
+
+    // 2) Copy-station visibility (only show if ?copy=1)
+    const params = new URLSearchParams(window.location.search);
+    const showCopy = params.get('copy') === '1';
+
+    if (showCopy) {
+      document.getElementById('copyStation').style.display = 'block';
+
+      // Load ad copy into the box
+      fetch('ad.txt', { cache: 'no-store' })
+        .then(r => r.text())
+        .then(t => {
+          document.getElementById('adcopy').textContent = (t || '').trim();
+        })
+        .catch(() => {
+          document.getElementById('adcopy').textContent = 'Ad copy not found. Please check ad.txt.';
+        });
+    }
   </script>
 </body>
 </html>
