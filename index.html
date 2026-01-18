@@ -207,9 +207,10 @@
     </div>
   </div>
 
-  <footer>
-    © 2026 YourBrand. This site is not affiliated with LeadsLeap. All rights reserved.
-  </footer>
+<footer>
+  © <span id="year"></span> Dean Lind. All rights reserved.
+</footer>
+
 
   <script>
     // -------------------------
@@ -300,6 +301,9 @@
           document.getElementById('bodyHtmlBox').textContent = 'ad.txt not found';
         });
     }
+
+  document.getElementById('year').textContent = new Date().getFullYear();
+    
   </script>
 
 </body>
