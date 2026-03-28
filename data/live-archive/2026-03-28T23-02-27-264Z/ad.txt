@@ -1,0 +1,12 @@
+SUBJECT:
+Test Subject Day 1
+
+BODY:
+Hey,
+
+This is a test of the safelist manager.
+
+If this publishes correctly, the app is working.
+
+Take a quick look here:
+👉 https://example.com
